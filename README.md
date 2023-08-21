@@ -1,5 +1,5 @@
 ## Setting Up OpenCV
-1. Download and install the OpenCV library if you haven't already.
+1. Download and install the [OpenCV library](https://opencv.org/releases/) if you haven't already. 
 
 2. In the Project "Properties" window, in Configuration, Select 'All Configuration'
 
