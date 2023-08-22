@@ -2,6 +2,7 @@
 #include <numeric>
 #include <opencv2/opencv.hpp>
 #include <cmath>
+#include <chrono> // For measuring time
 
 //For suppressing info logs in debug mode
 #include <opencv2/core/utils/logger.hpp>
@@ -52,7 +53,12 @@ std::vector< X > estimateCoefficients(std::vector<T> A, std::vector<T> B)
 Mat applyGrayscale(Mat source)
 {
     Mat dst;
+
+    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
     cvtColor(source, dst, COLOR_BGR2GRAY);
+    auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
+    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
+    std::cout << "Gray Scaling completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
 
     return dst;
 }
@@ -60,23 +66,29 @@ Mat applyGrayscale(Mat source)
 Mat applyGaussianBlur(Mat source)
 {
     Mat dst;
+    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
     GaussianBlur(source, dst, Size(3, 3), 0);
-
+    auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
+    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
+    std::cout << "Gaussian Blur completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
     return dst;
 }
 
 Mat applyCanny(Mat source)
 {
     Mat dst;
+    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
     Canny(source, dst, 50, 150);
-
+    auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
+    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
+    std::cout << "Canny Edge Detection completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
     return dst;
 }
 
 Mat filterColors(Mat source, bool isDayTime)
 {
     Mat hsv, whiteMask, whiteImage, yellowMask, yellowImage, whiteYellow;
-
+    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
     // White mask
     std::vector< int > lowerWhite = { 130, 130, 130 };
     std::vector< int > upperWhite = { 255, 255, 255 };
@@ -105,8 +117,14 @@ Mat filterColors(Mat source, bool isDayTime)
 
         // Blend gray, yellow and white together and return the result
         addWeighted(grayImage, 1., whiteYellow, 1., 0., dst);
+        auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
+        auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
+        std::cout << "Colour Filter completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
         return dst;
     }
+    auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
+    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
+    std::cout << "Colour Filter completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
 
     // Return white and yellow mask if image is taken during the day
     return whiteYellow;
@@ -135,7 +153,7 @@ Mat RegionOfInterest(Mat source)
 
     // Vector which holds all the points of the two trapezoids
     std::vector<Point> pts;
-
+    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
     // Large trapezoid
     pts.push_back(cv::Point((source.cols * (1 - trapezoidBottomWidth)) / 2, source.rows * bar)); // Bottom left
     pts.push_back(cv::Point((source.cols * (1 - trapezoidTopWidth)) / 2, source.rows - source.rows * trapezoidHeight)); // Top left
@@ -158,6 +176,10 @@ Mat RegionOfInterest(Mat source)
     Mat maskedImage;
     bitwise_and(source, mask, maskedImage);
 
+    auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
+    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
+    std::cout << "Region Masking completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
+
     return maskedImage;
 }
 
@@ -178,6 +200,7 @@ Mat drawLanes(Mat source, std::vector<Vec4i> lines)
     std::vector< float > slopes;
     std::vector< Vec4i > goodLines;
 
+    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
     for (int i = 0; i < lines.size(); i++)
     {
         /* Each line is represented by a 4-element vector (x_1, y_1, x_2, y_2),
@@ -326,8 +349,15 @@ Mat drawLanes(Mat source, std::vector<Vec4i> lines)
         addWeighted(source, 0.9, mask, 0.3, 0.0, dst);
 
         // Return blended image
+        auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
+        auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
+        std::cout << "Lane Drawing completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
         return dst;
     }
+
+    auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
+    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
+    std::cout << "Lane Drawing completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
 
     return source; // Return source if drawing lanes did not happen
 }
@@ -335,12 +365,15 @@ Mat drawLanes(Mat source, std::vector<Vec4i> lines)
 std::vector<Vec4i> houghLines(Mat canny, Mat source, bool drawHough)
 {
     double rho = 2; // Distance resolution in pixels of the Hough grid
-    double theta = 1 * M_PI / 180; // Angular resolution in radians of the Hough grid
+    double theta = 1 * M_PI / 180; // Angular resolution in radians of Hough grid
     int thresh = 15; // Minimum number of votes (intersections in Hough grid cell)
     double minLineLength = 10; // Minimum number of pixels making up a line
-    double maxGapLength = 20; // Maximum gap in pixels between connectable line segments
+    double maxGapLength = 20; // Max gap in pixels btwn connectable line segments
 
     std::vector<Vec4i> linesP; // Will hold the results of the detection
+
+    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
+
     HoughLinesP(canny, linesP, rho, theta, thresh, minLineLength, maxGapLength);
 
     if (drawHough == true)
@@ -348,11 +381,16 @@ std::vector<Vec4i> houghLines(Mat canny, Mat source, bool drawHough)
         for (size_t i = 0; i < linesP.size(); i++)
         {
             Vec4i l = linesP[i];
-            line(source, Point(l[0], l[1]), Point(l[2], l[3]), Scalar(0, 0, 255), 3, LINE_AA);
+            line(source, Point(l[0], l[1]), Point(l[2], l[3]), 
+                Scalar(0, 0, 255), 3, LINE_AA);
         }
         imshow("Hough Lines", source);
         waitKey(0);
     }
+
+    auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
+    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
+    std::cout << "Hough Transform completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
 
     return linesP;
 }
@@ -377,6 +415,8 @@ bool isDayTime(Mat source)
 
 void drawLane(Mat image) 
 {
+    // Record the start time
+    auto startTime = std::chrono::high_resolution_clock::now();
     // Determine if video is taken during daytime or not
     bool isDay = isDayTime(image);
 
@@ -398,13 +438,19 @@ void drawLane(Mat image)
     // Detect straight lines and draw the lanes if possible
     std::vector<Vec4i> linesP = houghLines(maskedIMG, image.clone(), false);
     Mat lanes = drawLanes(image, linesP);
+    // Record the end time
+    auto endTime = std::chrono::high_resolution_clock::now();
+    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
+    std::cout << "===============================================" << std::endl;
+    std::cout << "FRAME PROCESSING COMPLETED IN " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
+    std::cout << "===============================================" << std::endl;
     
     // Create a window with a fixed size
-    namedWindow("Lanes", WINDOW_NORMAL);
-    resizeWindow("Lanes", 1055, 785);
+    namedWindow("Lane Detection", WINDOW_NORMAL);
+    resizeWindow("Lane Detection", 527, 392);
 
     // Display the image in the named window
-    imshow("Lanes", lanes);
+    imshow("Lane Detection", lanes);
 }
 
 int main(int argc, char* argv[])
@@ -426,7 +472,7 @@ int main(int argc, char* argv[])
     bool isVideo = inputPath.find(".mp4") != std::string::npos;
 
     if (isVideo) {
-        // Initialize video capture for reading a videofile
+        // Initialize video capture
         VideoCapture cap(inputPath);
 
         // Check if video can be opened
