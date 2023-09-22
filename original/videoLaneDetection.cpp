@@ -126,165 +126,8 @@ Mat applyGrayscale(Mat source)
     return dst;
 }
 
-//template <typename T>
-//static void createGaussianKernels(T& kx, T& ky, int type, Size& ksize,
-//    double sigma1, double sigma2)
-//{
-//    int depth = CV_MAT_DEPTH(type);
-//    if (sigma2 <= 0)
-//        sigma2 = sigma1;
-//
-//    // automatic detection of kernel size from sigma
-//    if (ksize.width <= 0 && sigma1 > 0)
-//        ksize.width = cvRound(sigma1 * (depth == CV_8U ? 3 : 4) * 2 + 1) | 1;
-//    if (ksize.height <= 0 && sigma2 > 0)
-//        ksize.height = cvRound(sigma2 * (depth == CV_8U ? 3 : 4) * 2 + 1) | 1;
-//
-//    CV_Assert(ksize.width > 0 && ksize.width % 2 == 1 &&
-//        ksize.height > 0 && ksize.height % 2 == 1);
-//
-//    sigma1 = std::max(sigma1, 0.);
-//    sigma2 = std::max(sigma2, 0.);
-//
-//    getGaussianKernel(ksize.width, sigma1, std::max(depth, CV_32F), kx);
-//    if (ksize.height == ksize.width && std::abs(sigma1 - sigma2) < DBL_EPSILON)
-//        ky = kx;
-//    else
-//        getGaussianKernel(ksize.height, sigma2, std::max(depth, CV_32F), ky);
-//}
-//
-//void CustomGaussianBlur(InputArray _src, OutputArray _dst, Size ksize,
-//    double sigma1, double sigma2,
-//    int borderType)
-//{
-//    CV_Assert(!_src.empty());
-//
-//    int type = _src.type();
-//    Size size = _src.size();
-//    _dst.create(size, type);
-//
-//    if (ksize.width == 1 && ksize.height == 1)
-//    {
-//        _src.copyTo(_dst);
-//        return;
-//    }
-//
-//    if (sigma2 <= 0)
-//        sigma2 = sigma1;
-//
-//    int sdepth = CV_MAT_DEPTH(type), cn = CV_MAT_CN(type);
-//
-//    Mat kx, ky;
-//    createGaussianKernels(kx, ky, type, ksize, sigma1, sigma2);
-//
-//    if (sdepth == CV_8U && ((borderType & BORDER_ISOLATED) || !_src.isSubmatrix()))
-//    {
-//        std::vector<ufixedpoint16> fkx, fky;
-//        createGaussianKernels(fkx, fky, type, ksize, sigma1, sigma2);
-//
-//        Mat src = _src.getMat();
-//        Mat dst = _dst.getMat();
-//
-//        if (src.data == dst.data)
-//            src = src.clone();
-//
-//        CV_CPU_DISPATCH(GaussianBlurFixedPoint, (src, dst, (const uint16_t*)&fkx[0], (int)fkx.size(), (const uint16_t*)&fky[0], (int)fky.size(), borderType),
-//            CV_CPU_DISPATCH_MODES_ALL);
-//        return;
-//    }
-//    if (sdepth == CV_16U && ((borderType & BORDER_ISOLATED) || !_src.isSubmatrix()))
-//    {
-//        std::vector<ufixedpoint32> fkx, fky;
-//        createGaussianKernels(fkx, fky, type, ksize, sigma1, sigma2);
-//
-//        Mat src = _src.getMat();
-//        Mat dst = _dst.getMat();
-//
-//        if (src.data == dst.data)
-//            src = src.clone();
-//
-//        CV_CPU_DISPATCH(GaussianBlurFixedPoint, (src, dst, (const uint32_t*)&fkx[0], (int)fkx.size(), (const uint32_t*)&fky[0], (int)fky.size(), borderType),
-//            CV_CPU_DISPATCH_MODES_ALL);
-//        return;
-//    }
-//
-//    Mat src = _src.getMat();
-//    Mat dst = _dst.getMat();
-//
-//    Point ofs;
-//    Size wsz(src.cols, src.rows);
-//    if (!(borderType & BORDER_ISOLATED))
-//        src.locateROI(wsz, ofs);
-//
-//    sepFilter2D(src, dst, sdepth, kx, ky, Point(-1, -1), 0, borderType);
-//}
-
-Mat customGaussianBlur(const Mat& source, const Size& kernelSize, double sigma)
-{
-    Mat blurredImage(source.size(), source.type());
-
-    // Create a 1D Gaussian kernel
-    int kSize = kernelSize.width;
-    std::vector<double> kernel(kSize);
-    double sum = 0.0;
-    for (int i = 0; i < kSize; i++) {
-        int x = i - kSize / 2;
-        kernel[i] = exp(-(x * x) / (2.0 * sigma * sigma));
-        sum += kernel[i];
-    }
-
-    // Normalize the kernel
-    for (int i = 0; i < kSize; i++) {
-        kernel[i] /= sum;
-    }
-
-    // Apply the horizontal convolution
-    for (int y = 0; y < source.rows; y++) {
-        for (int x = 0; x < source.cols; x++) {
-            Vec3d sum(0.0, 0.0, 0.0);
-            for (int i = 0; i < kSize; i++) {
-                int offsetX = x - kSize / 2 + i;
-                if (offsetX >= 0 && offsetX < source.cols) {
-                    Vec3b pixel = source.at<Vec3b>(y, offsetX);
-                    for (int c = 0; c < 3; c++) {
-                        sum[c] += pixel[c] * kernel[i];
-                    }
-                }
-            }
-            Vec3b& resultPixel = blurredImage.at<Vec3b>(y, x);
-            for (int c = 0; c < 3; c++) {
-                resultPixel[c] = static_cast<uchar>(sum[c]);
-            }
-        }
-    }
-
-    // Apply the vertical convolution
-    for (int x = 0; x < source.cols; x++) {
-        for (int y = 0; y < source.rows; y++) {
-            Vec3d sum(0.0, 0.0, 0.0);
-            for (int i = 0; i < kSize; i++) {
-                int offsetY = y - kSize / 2 + i;
-                if (offsetY >= 0 && offsetY < source.rows) {
-                    Vec3b pixel = blurredImage.at<Vec3b>(offsetY, x);
-                    for (int c = 0; c < 3; c++) {
-                        sum[c] += pixel[c] * kernel[i];
-                    }
-                }
-            }
-            Vec3b& resultPixel = blurredImage.at<Vec3b>(y, x);
-            for (int c = 0; c < 3; c++) {
-                resultPixel[c] = static_cast<uchar>(sum[c]);
-            }
-        }
-    }
-
-    return blurredImage;
-}
-
 Mat applyGaussianBlur(Mat source)
 {
-    //Mat dst;
-    //auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
     Mat dst(source.rows, source.cols, source.type()); // Initialize the destination image
     auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
 
@@ -305,10 +148,37 @@ Mat applyGaussianBlur(Mat source)
     // Normalize the 2D kernel
     kernel2D /= cv::sum(kernel2D)[0];
 
-    // Apply convolution to each channel of the image
-    for (int c = 0; c < source.channels(); c++)
+    //// Apply convolution to each channel of the image
+    //// Iterate over the image pixels and apply the convolution
+    for (int y = 0; y < source.rows; y++)
     {
-        cv::filter2D(source, dst, -1, kernel2D, cv::Point(-1, -1), 0, cv::BORDER_DEFAULT);
+        for (int x = 0; x < source.cols; x++)
+        {
+            // Calculate the weighted sum of the neighboring pixels
+            double weightedSum = 0.0;
+            for (int ky = -kernelSize / 2; ky <= kernelSize / 2; ky++)
+            {
+                for (int kx = -kernelSize / 2; kx <= kernelSize / 2; kx++)
+                {
+                    // Get the neighboring pixel value
+                    int nx = x + kx;
+                    int ny = y + ky;
+
+                    // Check if the neighboring pixel is within the image bounds
+                    if (nx >= 0 && nx < source.cols && ny >= 0 && ny < source.rows)
+                    {
+                        // Calculate the kernel weight
+                        double weight = kernel2D.at<double>(ky + kernelSize / 2, kx + kernelSize / 2);
+
+                        // Add the weighted pixel value to the weighted sum
+                        weightedSum += source.at<uchar>(ny, nx) * weight;
+                    }
+                }
+            }
+
+            // Set the destination pixel value
+            dst.at<uchar>(y, x) = static_cast<uchar>(weightedSum);
+        }
     }
 
     auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
@@ -317,14 +187,15 @@ Mat applyGaussianBlur(Mat source)
     return dst;
 }
 
-void customCanny(InputArray _src, OutputArray _dst,
-    double low_thresh, double high_thresh,
-    int aperture_size, bool L2gradient)
+Mat applyCanny(Mat source, double low_thresh = 50, double high_thresh = 100, int aperture_size = 3, bool L2gradient = false)
 {
-    cv::Mat src = _src.getMat();
+    Mat dst;
+    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
+
+    Mat src = source.clone(); // Clone the source image to avoid modifying it
     cv::Size size = src.size();
-    cv::Mat dst;
-    
+    cv::Mat gradient;
+
     // Calculate gradients (Sobel operators)
     cv::Mat grad_x, grad_y;
     cv::Sobel(src, grad_x, CV_16S, 1, 0, aperture_size);
@@ -335,7 +206,6 @@ void customCanny(InputArray _src, OutputArray _dst,
     cv::convertScaleAbs(grad_x, abs_grad_x);
     cv::convertScaleAbs(grad_y, abs_grad_y);
 
-    cv::Mat gradient;
     cv::addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0, gradient);
 
     // Non-maximum suppression
@@ -368,17 +238,10 @@ void customCanny(InputArray _src, OutputArray _dst,
         }
     }
 
-    dst.copyTo(_dst);
-}
-
-Mat applyCanny(Mat source)
-{
-    Mat dst;
-    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
-    customCanny(source, dst, 50, 100, 3, false);
     auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
     auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
     std::cout << "Canny Edge Detection completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
+
     return dst;
 }
 
@@ -444,17 +307,6 @@ Mat RegionOfInterest(Mat source)
 }
 
 // START: for Hough Transform Probabilistics
-int computeNumangle(double min_theta, double max_theta, double theta_step)
-{
-    int numangle = cvFloor((max_theta - min_theta) / theta_step) + 1;
-    // If the distance between the first angle and the last angle is
-    // approximately equal to pi, then the last angle will be removed
-    // in order to prevent a line to be detected twice.
-    if (numangle > 1 && fabs(CV_PI - (numangle - 1) * theta_step) < theta_step / 2)
-        --numangle;
-    return numangle;
-}
-
 void HoughLinesProbabilistic(cv::Mat& image,
     float rho, float theta, int threshold,
     int lineLength, int lineGap,
@@ -468,7 +320,14 @@ void HoughLinesProbabilistic(cv::Mat& image,
     int width = image.cols;
     int height = image.rows;
 
-    int numangle = computeNumangle(0.0, CV_PI, theta);
+    //compute numangle
+    int numangle = cvFloor((CV_PI - 0.0) / theta) + 1;
+    // If the distance between the first angle and the last angle is
+    // approximately equal to pi, then the last angle will be removed
+    // in order to prevent a line to be detected twice.
+    if (numangle > 1 && fabs(CV_PI - (numangle - 1) * theta) < theta / 2)
+        --numangle;
+
     int numrho = cvRound(((width + height) * 2 + 1) / rho);
 
     cv::Mat accum = cv::Mat::zeros(numangle, numrho, CV_32SC1);
