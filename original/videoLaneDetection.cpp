@@ -50,39 +50,22 @@ std::vector< X > estimateCoefficients(std::vector<T> A, std::vector<T> B)
     return coef;
 }
 
-Mat applyGrayscale(Mat source)
+bool isDayTime(Mat source)
 {
-    Mat dst;
+    /* We've noticed that, in general, daytime images/videos require different color
+    filters than nighttime images/videos. For example, in darker light it is better
+    to add a gray color filter in addition to the white and yellow one */
 
-    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
-    cvtColor(source, dst, COLOR_BGR2GRAY);
-    auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
-    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
-    std::cout << "Gray Scaling completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
+    Scalar s = mean(source); // Mean pixel values 
 
-    return dst;
-}
+    /* We chose these cut off values by looking at the mean pixel values of multiple
+    daytime and nighttime images */
+    if (s[0] < 30 || s[1] < 33 && s[2] < 30)
+    {
+        return false;
+    }
 
-Mat applyGaussianBlur(Mat source)
-{
-    Mat dst;
-    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
-    GaussianBlur(source, dst, Size(3, 3), 0);
-    auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
-    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
-    std::cout << "Gaussian Blur completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
-    return dst;
-}
-
-Mat applyCanny(Mat source)
-{
-    Mat dst;
-    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
-    Canny(source, dst, 50, 150);
-    auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
-    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
-    std::cout << "Canny Edge Detection completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
-    return dst;
+    return true;
 }
 
 Mat filterColors(Mat source, bool isDayTime)
@@ -130,6 +113,275 @@ Mat filterColors(Mat source, bool isDayTime)
     return whiteYellow;
 }
 
+Mat applyGrayscale(Mat source)
+{
+    Mat dst;
+
+    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
+    cvtColor(source, dst, COLOR_BGR2GRAY);
+    auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
+    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
+    std::cout << "Gray Scaling completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
+
+    return dst;
+}
+
+//template <typename T>
+//static void createGaussianKernels(T& kx, T& ky, int type, Size& ksize,
+//    double sigma1, double sigma2)
+//{
+//    int depth = CV_MAT_DEPTH(type);
+//    if (sigma2 <= 0)
+//        sigma2 = sigma1;
+//
+//    // automatic detection of kernel size from sigma
+//    if (ksize.width <= 0 && sigma1 > 0)
+//        ksize.width = cvRound(sigma1 * (depth == CV_8U ? 3 : 4) * 2 + 1) | 1;
+//    if (ksize.height <= 0 && sigma2 > 0)
+//        ksize.height = cvRound(sigma2 * (depth == CV_8U ? 3 : 4) * 2 + 1) | 1;
+//
+//    CV_Assert(ksize.width > 0 && ksize.width % 2 == 1 &&
+//        ksize.height > 0 && ksize.height % 2 == 1);
+//
+//    sigma1 = std::max(sigma1, 0.);
+//    sigma2 = std::max(sigma2, 0.);
+//
+//    getGaussianKernel(ksize.width, sigma1, std::max(depth, CV_32F), kx);
+//    if (ksize.height == ksize.width && std::abs(sigma1 - sigma2) < DBL_EPSILON)
+//        ky = kx;
+//    else
+//        getGaussianKernel(ksize.height, sigma2, std::max(depth, CV_32F), ky);
+//}
+//
+//void CustomGaussianBlur(InputArray _src, OutputArray _dst, Size ksize,
+//    double sigma1, double sigma2,
+//    int borderType)
+//{
+//    CV_Assert(!_src.empty());
+//
+//    int type = _src.type();
+//    Size size = _src.size();
+//    _dst.create(size, type);
+//
+//    if (ksize.width == 1 && ksize.height == 1)
+//    {
+//        _src.copyTo(_dst);
+//        return;
+//    }
+//
+//    if (sigma2 <= 0)
+//        sigma2 = sigma1;
+//
+//    int sdepth = CV_MAT_DEPTH(type), cn = CV_MAT_CN(type);
+//
+//    Mat kx, ky;
+//    createGaussianKernels(kx, ky, type, ksize, sigma1, sigma2);
+//
+//    if (sdepth == CV_8U && ((borderType & BORDER_ISOLATED) || !_src.isSubmatrix()))
+//    {
+//        std::vector<ufixedpoint16> fkx, fky;
+//        createGaussianKernels(fkx, fky, type, ksize, sigma1, sigma2);
+//
+//        Mat src = _src.getMat();
+//        Mat dst = _dst.getMat();
+//
+//        if (src.data == dst.data)
+//            src = src.clone();
+//
+//        CV_CPU_DISPATCH(GaussianBlurFixedPoint, (src, dst, (const uint16_t*)&fkx[0], (int)fkx.size(), (const uint16_t*)&fky[0], (int)fky.size(), borderType),
+//            CV_CPU_DISPATCH_MODES_ALL);
+//        return;
+//    }
+//    if (sdepth == CV_16U && ((borderType & BORDER_ISOLATED) || !_src.isSubmatrix()))
+//    {
+//        std::vector<ufixedpoint32> fkx, fky;
+//        createGaussianKernels(fkx, fky, type, ksize, sigma1, sigma2);
+//
+//        Mat src = _src.getMat();
+//        Mat dst = _dst.getMat();
+//
+//        if (src.data == dst.data)
+//            src = src.clone();
+//
+//        CV_CPU_DISPATCH(GaussianBlurFixedPoint, (src, dst, (const uint32_t*)&fkx[0], (int)fkx.size(), (const uint32_t*)&fky[0], (int)fky.size(), borderType),
+//            CV_CPU_DISPATCH_MODES_ALL);
+//        return;
+//    }
+//
+//    Mat src = _src.getMat();
+//    Mat dst = _dst.getMat();
+//
+//    Point ofs;
+//    Size wsz(src.cols, src.rows);
+//    if (!(borderType & BORDER_ISOLATED))
+//        src.locateROI(wsz, ofs);
+//
+//    sepFilter2D(src, dst, sdepth, kx, ky, Point(-1, -1), 0, borderType);
+//}
+
+Mat customGaussianBlur(const Mat& source, const Size& kernelSize, double sigma)
+{
+    Mat blurredImage(source.size(), source.type());
+
+    // Create a 1D Gaussian kernel
+    int kSize = kernelSize.width;
+    std::vector<double> kernel(kSize);
+    double sum = 0.0;
+    for (int i = 0; i < kSize; i++) {
+        int x = i - kSize / 2;
+        kernel[i] = exp(-(x * x) / (2.0 * sigma * sigma));
+        sum += kernel[i];
+    }
+
+    // Normalize the kernel
+    for (int i = 0; i < kSize; i++) {
+        kernel[i] /= sum;
+    }
+
+    // Apply the horizontal convolution
+    for (int y = 0; y < source.rows; y++) {
+        for (int x = 0; x < source.cols; x++) {
+            Vec3d sum(0.0, 0.0, 0.0);
+            for (int i = 0; i < kSize; i++) {
+                int offsetX = x - kSize / 2 + i;
+                if (offsetX >= 0 && offsetX < source.cols) {
+                    Vec3b pixel = source.at<Vec3b>(y, offsetX);
+                    for (int c = 0; c < 3; c++) {
+                        sum[c] += pixel[c] * kernel[i];
+                    }
+                }
+            }
+            Vec3b& resultPixel = blurredImage.at<Vec3b>(y, x);
+            for (int c = 0; c < 3; c++) {
+                resultPixel[c] = static_cast<uchar>(sum[c]);
+            }
+        }
+    }
+
+    // Apply the vertical convolution
+    for (int x = 0; x < source.cols; x++) {
+        for (int y = 0; y < source.rows; y++) {
+            Vec3d sum(0.0, 0.0, 0.0);
+            for (int i = 0; i < kSize; i++) {
+                int offsetY = y - kSize / 2 + i;
+                if (offsetY >= 0 && offsetY < source.rows) {
+                    Vec3b pixel = blurredImage.at<Vec3b>(offsetY, x);
+                    for (int c = 0; c < 3; c++) {
+                        sum[c] += pixel[c] * kernel[i];
+                    }
+                }
+            }
+            Vec3b& resultPixel = blurredImage.at<Vec3b>(y, x);
+            for (int c = 0; c < 3; c++) {
+                resultPixel[c] = static_cast<uchar>(sum[c]);
+            }
+        }
+    }
+
+    return blurredImage;
+}
+
+Mat applyGaussianBlur(Mat source)
+{
+    //Mat dst;
+    //auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
+    Mat dst(source.rows, source.cols, source.type()); // Initialize the destination image
+    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
+
+    // Manual Gaussian blur
+    int kernelSize = 3;  // Adjust the kernel size as needed
+    double sigma = 0.0; // Sigma of 0 means auto-calculate based on kernel size
+
+    // Calculate sigma if it's set to 0
+    if (sigma == 0.0)
+    {
+        sigma = 0.3 * ((kernelSize - 1) * 0.5 - 1) + 0.8;
+    }
+
+    // Create a 2D Gaussian kernel
+    cv::Mat kernel = cv::getGaussianKernel(kernelSize, sigma, CV_64F);
+    cv::Mat kernel2D = kernel * kernel.t(); // 2D kernel
+
+    // Normalize the 2D kernel
+    kernel2D /= cv::sum(kernel2D)[0];
+
+    // Apply convolution to each channel of the image
+    for (int c = 0; c < source.channels(); c++)
+    {
+        cv::filter2D(source, dst, -1, kernel2D, cv::Point(-1, -1), 0, cv::BORDER_DEFAULT);
+    }
+
+    auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
+    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
+    std::cout << "Gaussian Blur completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
+    return dst;
+}
+
+void customCanny(InputArray _src, OutputArray _dst,
+    double low_thresh, double high_thresh,
+    int aperture_size, bool L2gradient)
+{
+    cv::Mat src = _src.getMat();
+    cv::Size size = src.size();
+    cv::Mat dst;
+    
+    // Calculate gradients (Sobel operators)
+    cv::Mat grad_x, grad_y;
+    cv::Sobel(src, grad_x, CV_16S, 1, 0, aperture_size);
+    cv::Sobel(src, grad_y, CV_16S, 0, 1, aperture_size);
+
+    // Compute gradient magnitude and direction
+    cv::Mat abs_grad_x, abs_grad_y;
+    cv::convertScaleAbs(grad_x, abs_grad_x);
+    cv::convertScaleAbs(grad_y, abs_grad_y);
+
+    cv::Mat gradient;
+    cv::addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0, gradient);
+
+    // Non-maximum suppression
+    dst = cv::Mat::zeros(size, CV_8U);
+
+    for (int i = 1; i < size.height - 1; i++) {
+        for (int j = 1; j < size.width - 1; j++) {
+            uchar* pixel = dst.ptr<uchar>(i) + j;
+
+            int dx = grad_x.at<short>(i, j);
+            int dy = grad_y.at<short>(i, j);
+
+            float gradientValue = gradient.at<uchar>(i, j);
+
+            if (gradientValue >= high_thresh) {
+                *pixel = 255;
+            }
+            else if (gradientValue >= low_thresh && gradientValue < high_thresh) {
+                if (gradient.at<uchar>(i + 1, j) >= high_thresh ||
+                    gradient.at<uchar>(i - 1, j) >= high_thresh ||
+                    gradient.at<uchar>(i, j + 1) >= high_thresh ||
+                    gradient.at<uchar>(i, j - 1) >= high_thresh ||
+                    gradient.at<uchar>(i + 1, j + 1) >= high_thresh ||
+                    gradient.at<uchar>(i - 1, j - 1) >= high_thresh ||
+                    gradient.at<uchar>(i - 1, j + 1) >= high_thresh ||
+                    gradient.at<uchar>(i + 1, j - 1) >= high_thresh) {
+                    *pixel = 255;
+                }
+            }
+        }
+    }
+
+    dst.copyTo(_dst);
+}
+
+Mat applyCanny(Mat source)
+{
+    Mat dst;
+    auto startTime = std::chrono::high_resolution_clock::now(); // Record the start time
+    customCanny(source, dst, 50, 100, 3, false);
+    auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
+    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
+    std::cout << "Canny Edge Detection completed in " << std::setprecision(7) << std::fixed << executionTime << " seconds." << std::endl;
+    return dst;
+}
+
 Mat RegionOfInterest(Mat source)
 {
     /* In an ideal situation, the ROI should only contain the road lanes.
@@ -173,8 +425,16 @@ Mat RegionOfInterest(Mat source)
     /* And here we basically put the mask over the source image,
     meaning we return an all black image, except for the part where the mask image
     has nonzero pixels: all the pixels in the space between the two trapezoids */
-    Mat maskedImage;
-    bitwise_and(source, mask, maskedImage);
+    
+    // Perform manual pixel-wise bitwise AND operation
+    Mat maskedImage = Mat::zeros(source.size(), source.type());
+    for (int i = 0; i < source.rows; i++) {
+        for (int j = 0; j < source.cols; j++) {
+            if (mask.at<uchar>(i, j) != 0) {
+                maskedImage.at<uchar>(i, j) = source.at<uchar>(i, j);
+            }
+        }
+    }
 
     auto endTime = std::chrono::high_resolution_clock::now(); // Record the end time
     auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count() / 1000000.0; // Convert to seconds
@@ -423,7 +683,7 @@ void customHoughLinesP(cv::Mat canny, std::vector<cv::Vec4i>& linesP,
     linesP = lines; // Copy the computed lines to the output vector.
 }
 
-std::vector<Vec4i> houghLinesP(Mat canny, Mat source, bool drawHough)
+std::vector<Vec4i> houghLines(Mat canny, Mat source, bool drawHough)
 {
     double rho = 2; // Distance resolution in pixels of the Hough grid
     double theta = 1 * M_PI / 180; // Angular resolution in radians of Hough grid
@@ -486,7 +746,7 @@ Mat drawLanes(Mat source, std::vector<Vec4i> lines)
         double slope;
 
         // Calculate slope
-        if (l[2] - l[0] == 0) // Avoid division by zero
+        if (l[2] - l[0] == 0 || l[0] == 0) // Avoid division by zero
         {
             slope = 999; // Basically infinte slope
         }
@@ -639,24 +899,6 @@ Mat drawLanes(Mat source, std::vector<Vec4i> lines)
     return source; // Return source if drawing lanes did not happen
 }
 
-bool isDayTime(Mat source)
-{
-    /* We've noticed that, in general, daytime images/videos require different color
-    filters than nighttime images/videos. For example, in darker light it is better
-    to add a gray color filter in addition to the white and yellow one */
-
-    Scalar s = mean(source); // Mean pixel values 
-
-    /* We chose these cut off values by looking at the mean pixel values of multiple
-    daytime and nighttime images */
-    if (s[0] < 30 || s[1] < 33 && s[2] < 30)
-    {
-        return false;
-    }
-
-    return true;
-}
-
 void drawLane(Mat image) 
 {
     // Record the start time
@@ -680,7 +922,7 @@ void drawLane(Mat image)
     Mat maskedIMG = RegionOfInterest(edges);
 
     // Detect straight lines and draw the lanes if possible
-    std::vector<cv::Vec4i> linesP = houghLinesP(maskedIMG, image.clone(), true);
+    std::vector<cv::Vec4i> linesP = houghLines(maskedIMG, image.clone(), true);
     Mat lanes = drawLanes(image, linesP);
     // Record the end time
     auto endTime = std::chrono::high_resolution_clock::now();
@@ -747,7 +989,8 @@ int main(int argc, char* argv[])
         }
     }
     else if (inputPath.find(".png") != std::string::npos ||
-        inputPath.find(".jpg") != std::string::npos) {
+        inputPath.find(".jpg") != std::string::npos ||
+        inputPath.find(".jpeg") != std::string::npos) {
         // Load the image
         Mat image = imread(inputPath);
         if (image.empty()) {
