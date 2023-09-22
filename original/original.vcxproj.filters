@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="videoLanedDetection.cpp">
+    <ClCompile Include="videoLaneDetection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

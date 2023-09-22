@@ -1,117 +1,117 @@
-﻿  videoLanedDetection.cpp
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(143,29): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(147,28): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(148,25): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(152,15): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(158,89): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+﻿  videoLaneDetection.cpp
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(143,29): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(147,28): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(148,25): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(152,15): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(158,89): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(158,72): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(158,72): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(159,86): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(159,86): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(159,69): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(159,69): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(160,100): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(160,100): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(160,41): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(160,41): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(161,103): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(161,103): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(161,41): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(161,41): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(164,108): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(164,108): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(164,91): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(164,91): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(165,102): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(165,102): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(165,85): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(165,85): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(166,116): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(166,116): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(166,41): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(166,41): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(167,122): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(167,122): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(167,41): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(167,41): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(222,30): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(499,30): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(313,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(316,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(317,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(319,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(320,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(32,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(268,43): message : see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(590,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(593,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(594,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(596,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(597,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(32,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(545,43): message : see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
           with
           [
               _Tp=double
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(23,26): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(23,26): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
           with
           [
               _Ty=double
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(39,14): message : see reference to function template instantiation 'X multiplyAndSum<int,int>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(39,14): message : see reference to function template instantiation 'X multiplyAndSum<int,int>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
           with
           [
               X=int
           ]
-C:\Users\User\Desktop\dspc-assignment\original\videoLanedDetection.cpp(268,43): message : see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(545,43): message : see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
           with
           [
               _Tp=double
           ]
-  original.vcxproj -> C:\Users\User\Desktop\dspc-assignment\x64\Debug\original.exe
+  original.vcxproj -> C:\Users\INTEL\project\dspc-assignment\x64\Debug\original.exe
