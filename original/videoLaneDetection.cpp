@@ -763,13 +763,13 @@ void drawLane(Mat image)
     // Record the start time
     auto startTime = std::chrono::high_resolution_clock::now();
     // Determine if video is taken during daytime or not
-    bool isDay = isDayTime(image);
+    //bool isDay = isDayTime(image);
 
     // Filter image 
-    Mat filteredIMG = filterColors(image, isDay);
+    //Mat filteredIMG = filterColors(image, isDay);
 
     // Apply grayscale
-    Mat gray = applyGrayscale(filteredIMG);
+    Mat gray = applyGrayscale(image);
 
     // Apply Gaussian blur
     Mat gBlur = applyGaussianBlur(gray);

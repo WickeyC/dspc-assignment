@@ -1,3 +1,5 @@
 .vs
 opencv*
 *.dll
+*.nsys-rep
+*.sqlite

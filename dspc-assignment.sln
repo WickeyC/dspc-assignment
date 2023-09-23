@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pThread", "pThread\pThread.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "original", "original\original.vcxproj", "{AAF8D6E4-922C-4791-95FB-E6FB60CCA4E6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CUDA", "CUDA\CUDA.vcxproj", "{A9B00218-F6D1-4519-8E02-34E20D611A7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -43,6 +45,14 @@ Global
 		{AAF8D6E4-922C-4791-95FB-E6FB60CCA4E6}.Release|x64.Build.0 = Release|x64
 		{AAF8D6E4-922C-4791-95FB-E6FB60CCA4E6}.Release|x86.ActiveCfg = Release|Win32
 		{AAF8D6E4-922C-4791-95FB-E6FB60CCA4E6}.Release|x86.Build.0 = Release|Win32
+		{A9B00218-F6D1-4519-8E02-34E20D611A7C}.Debug|x64.ActiveCfg = Debug|x64
+		{A9B00218-F6D1-4519-8E02-34E20D611A7C}.Debug|x64.Build.0 = Debug|x64
+		{A9B00218-F6D1-4519-8E02-34E20D611A7C}.Debug|x86.ActiveCfg = Debug|x64
+		{A9B00218-F6D1-4519-8E02-34E20D611A7C}.Debug|x86.Build.0 = Debug|x64
+		{A9B00218-F6D1-4519-8E02-34E20D611A7C}.Release|x64.ActiveCfg = Release|x64
+		{A9B00218-F6D1-4519-8E02-34E20D611A7C}.Release|x64.Build.0 = Release|x64
+		{A9B00218-F6D1-4519-8E02-34E20D611A7C}.Release|x86.ActiveCfg = Release|x64
+		{A9B00218-F6D1-4519-8E02-34E20D611A7C}.Release|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
