@@ -1,0 +1,1 @@
+C:\Users\INTEL\project\dspc-assignment\pThread\x64\Debug\pThread.vcxproj.CopyComplete

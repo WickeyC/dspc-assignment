@@ -1,0 +1,117 @@
+﻿  OpenMP.cpp
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(257,29): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(260,28): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(261,25): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(264,15): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(269,89): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(269,72): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(270,86): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(270,69): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(271,100): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(271,41): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(272,103): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(272,41): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(274,108): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(274,91): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(275,102): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(275,85): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(276,116): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(276,41): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(277,122): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(277,41): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(610,30): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(701,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(704,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(705,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(707,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(708,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(35,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(656,43): message : see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
+          with
+          [
+              _Tp=double
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(26,26): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(42,14): message : see reference to function template instantiation 'X multiplyAndSum<int,int>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
+          with
+          [
+              X=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\OpenMP\OpenMP.cpp(656,43): message : see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
+          with
+          [
+              _Tp=double
+          ]
+  OpenMP.vcxproj -> C:\Users\INTEL\project\dspc-assignment\x64\Debug\OpenMP.exe
