@@ -83,18 +83,18 @@ C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(282,41): 
           [
               _Tp=int
           ]
-C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(618,30): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(623,30): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(709,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(712,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(713,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(715,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(716,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(714,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(717,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(718,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(720,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(721,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(32,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(664,43): message : see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(669,43): message : see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
           with
           [
               _Tp=double
@@ -109,7 +109,7 @@ C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(39,14): m
           [
               X=int
           ]
-C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(664,43): message : see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
+C:\Users\INTEL\project\dspc-assignment\original\videoLaneDetection.cpp(669,43): message : see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
           with
           [
               _Tp=double

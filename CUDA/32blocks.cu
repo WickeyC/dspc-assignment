@@ -1,4 +1,4 @@
-﻿#include <vector>
+#include <vector>
 #include <numeric>
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/cuda.hpp>
@@ -467,7 +467,7 @@ std::vector<cv::Point> collectNonZeroImagePointsCuda(const cv::Mat& image, uchar
     dim3 gridDim((image.cols * image.rows + blockDim.x - 1) / blockDim.x);
 
     // Launch the CUDA kernel to collect non-zero image points
-    collectNonZeroImagePointsCudaKernel << <gridDim, blockDim >> > (d_image, 
+    collectNonZeroImagePointsCudaKernel << <gridDim, blockDim >> > (d_image,
         image.cols, image.rows, d_mask, d_nzx, d_nzy, d_count);
     cudaDeviceSynchronize();
 

@@ -3,3 +3,6 @@ opencv*
 *.dll
 *.nsys-rep
 *.sqlite
+*.png
+*.jpg
+*.mp4

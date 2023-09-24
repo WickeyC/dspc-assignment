@@ -53,66 +53,52 @@ C:\Program Files\opencv\build\include\opencv2/stitching/detail/blenders.hpp(127)
     class  MultiBandBlender : public Blender
            ^
   
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(441): warning #177-D: variable "r" was declared but never referenced
-                        int r = ridx - (numrho - 1) / 2;
-                            ^
-  
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(598): warning #177-D: variable "slopeThreshold" was declared but never referenced
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(778): warning #177-D: variable "slopeThreshold" was declared but never referenced
         float slopeThreshold = 0.5;
               ^
   
   kernel.cu
-  tmpxft_00003d08_00000000-7_kernel.cudafe1.cpp
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(350): warning C4305: 'initializing': truncation from 'double' to 'float'
+  tmpxft_000060b8_00000000-7_kernel.cudafe1.cpp
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(348): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(352): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(359): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(353): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(357): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(363): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(359): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(363): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(360): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(364): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(360): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(364): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(361): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(365): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(361): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(365): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(362): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(366): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
           ]
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(362): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
-          with
-          [
-              _Tp=int
-          ]
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(365): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(366): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(368): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
-          with
-          [
-              _Tp=int
-          ]
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(368): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(366): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
           with
           [
               _Tp=int
@@ -147,23 +133,33 @@ C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(371): warning C4244: 'argu
           [
               _Tp=int
           ]
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(621): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(372): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(372): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(801): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(712): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(715): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(716): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(718): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(719): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(667): note: see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(892): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(895): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(896): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(898): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(899): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(45): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(847): note: see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
           with
           [
               _Tp=double
           ]
-C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(34): warning C4244: '=': conversion from '_Ty' to 'X', possible loss of data
+C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(36): warning C4244: '=': conversion from '_Ty' to 'X', possible loss of data
           with
           [
               _Ty=double
@@ -172,13 +168,13 @@ C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(34): warning C4244: '=': c
           [
               X=int
           ]
-  C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(50): note: see reference to function template instantiation 'X multiplyAndSum<T,T>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
+  C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(52): note: see reference to function template instantiation 'X multiplyAndSum<T,T>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
           with
           [
               X=int,
               T=int
           ]
-  C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(667): note: see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
+  C:\Users\INTEL\project\dspc-assignment\CUDA\kernel.cu(847): note: see reference to function template instantiation 'std::vector<_Tp,std::allocator<_Tp>> estimateCoefficients<int,double>(std::vector<int,std::allocator<int>>,std::vector<int,std::allocator<int>>)' being compiled
           with
           [
               _Tp=double

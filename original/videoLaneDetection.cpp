@@ -561,6 +561,11 @@ std::vector<Vec4i> houghLines(Mat canny, Mat source, bool drawHough)
         for (size_t i = 0; i < linesP.size(); i++)
         {
             Vec4i l = linesP[i];
+
+            //printf("%d ", l[0]);
+            //printf("%d ", l[1]);
+            //printf("%d ", l[2]);
+            //printf("%d \n", l[3]);
             line(source, Point(l[0], l[1]), Point(l[2], l[3]),
                 Scalar(0, 0, 255), 3, LINE_AA);
         }
@@ -782,6 +787,7 @@ void drawLane(Mat image)
 
     // Detect straight lines and draw the lanes if possible
     std::vector<cv::Vec4i> linesP = houghLines(maskedIMG, image.clone(), true);
+
     Mat lanes = drawLanes(image, linesP);
     // Record the end time
     auto endTime = std::chrono::high_resolution_clock::now();
